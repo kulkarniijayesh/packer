@@ -42,7 +42,7 @@
         "type": "windows-restart"
       },
       {
-        "script": "./sample_script.ps1",
+        "script": "sample_script.ps1",
         "type": "powershell",
         "environment_vars": [
           "VAR1=A$Dollar",
