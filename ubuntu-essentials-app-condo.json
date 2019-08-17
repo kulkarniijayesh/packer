@@ -18,7 +18,7 @@
             "most_recent":true
         },
         "instance_type":"t2.micro",
-        "ssh_usernae":"ubuntu",
-        "ami-name":"ubuntu-essentials-app-condo {{timestamp}}"
+        "ssh_username":"ubuntu",
+        "ami_name":"ubuntu-essentials-app-condo {{timestamp}}"
     }]
 }
