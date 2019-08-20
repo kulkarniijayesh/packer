@@ -27,6 +27,7 @@
         "echo \"Installing Apache server\"",
         "sudo apt-get install -y apache2",
         "sudo service apache2 restart",
+        "sudo touch /var/www/html/index.html",
         "sudo echo \" Hello World - SITENAME\" > /var/www/html/index.html"
       ]
     }]
