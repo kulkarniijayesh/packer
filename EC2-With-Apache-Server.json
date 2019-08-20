@@ -25,7 +25,7 @@
       "type":"shell",
       "inline":[
         "echo \"Installing Apache server\"",
-        "sudo apt-get install -y httpd",
+        "sudo apt-get install -y apache2",
         "systemctl start httpd.service",
         "systemctl enable httpd.service",
         "echo \" Hello World - SITENAME\" > /var/www/html/index.html"
