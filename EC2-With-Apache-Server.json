@@ -26,8 +26,7 @@
       "inline":[
         "echo \"Installing Apache server\"",
         "sudo apt-get install -y apache2",
-        "sudo systemctl start apache2.service",
-        "sudo systemctl enable apache2.service",
+        "sudo service apache2 restart",
         "sudo echo \" Hello World - SITENAME\" > /var/www/html/index.html"
       ]
     }]
