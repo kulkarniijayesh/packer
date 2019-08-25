@@ -1,0 +1,50 @@
+{
+    "variables":{
+        "aws_access_key":"",
+        "aws_secret_key":""
+    },
+    "builders":[{
+            "type":"amazon-ebs",
+            "access_key":"{{user `aws_access_key`}}",
+            "secret_key":"{{user `aws_secret_key`}}",
+            "region":"ap-south-1",
+            "source_ami_filter":{
+            "filters":{
+                "virtualization-type":"hvm",
+                "name":"ubuntu/images/*ubuntu-xenial-16.04-amd64-server-*",
+                "root-device-type":"ebs"       
+            },
+            "owners":["099720109477"],
+            "most_recent":true,
+            "instance_type":"t2.micro",
+            "ssh_username":"ubuntu",
+            "ami_name":"Docker-Swarm-Cluster-NodeApp {{timestamp}}"
+        }
+    }],
+    "provisioners":[{
+        "type":"shell",
+        "inline":[
+            "echo \"Setting up a docker swarm cluster instance\" ",
+            "sudo apt update && sudo apt install -y curl && sudo apt install -y git",
+            "curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -",
+            "sudo apt install -y nodejs",
+            "echo \"Node.js version :\" $(node -v)",
+            "echo \"npm version :\" $(npm -v)",
+            "echo \" Fetching nodeapp code artifacts...\"",
+            "mkdir app",
+            "cd ~/app && git init && git pull https://github.com/kulkarniijayesh/NodeApp",
+            "cd ~/app && npm install",
+            "echo \"Setting up docker...\"",
+            "sudo apt install -y docker.io",
+            "sudo usermod -aG docker $USER",
+            "echo \"Setting up docker-compose\"",
+            "sudo sudo curl -L \"https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)\" -o /usr/local/bin/docker-compose",
+            "sudo chmod +x /usr/local/bin/docker-compose",
+            "echo \"docker-compose version : \" $(docker-compose --version)",
+            "sudo docker swarm init",
+            "cd ~/app && docker-compose up",
+            "echo \"Started docker in swarm mode and exposed service using port : 80\""
+        ]
+    }]
+
+}
