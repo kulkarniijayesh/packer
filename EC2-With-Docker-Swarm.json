@@ -43,7 +43,7 @@
             "sudo chmod +x /usr/local/bin/docker-compose",
             "echo \"docker-compose version : \" $(docker-compose --version)",
             "sudo docker swarm init",
-            "cd ~/app && docker stack deploy --compose-file docker-compose.yml nodeappservice",
+            "cd ~/app && sudo docker stack deploy --compose-file docker-compose.yml nodeappservice",
             "echo \"Started docker in swarm mode and exposed service using port : 80\""
         ]
     }]
